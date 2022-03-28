@@ -3,6 +3,7 @@
 # HELLO
 ## 유수민
 ### 오형석
+**리정만**
 
 ```java
 public class BootSpringBootApplication {
@@ -11,3 +12,5 @@ public class BootSpringBootApplication {
   }
 }
 ```
+
+
