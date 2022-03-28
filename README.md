@@ -1,8 +1,8 @@
 # indukcs_test
 # Hi
 # HELLO
-This is Sumin
-=============
+## 유수민
+### 오형석
 
 ```java
 public class BootSpringBootApplication {
