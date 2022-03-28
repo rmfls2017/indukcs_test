@@ -8,7 +8,7 @@
 ```java
 public class BootSpringBootApplication {
   public static void main(String[] args) {
-    System.out.println("Hello, Honeymon");
+    System.out.println("집가고 싶다");
   }
 }
 ```
