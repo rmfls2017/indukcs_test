@@ -45,3 +45,7 @@
 
 # 메인 컴포넌트 구성
 ![react_detail_component](https://user-images.githubusercontent.com/93474297/165072270-7994a5d5-7337-427b-b14b-c8985e8a4490.png)
+
+# 컴포넌트 구성
+![123](https://user-images.githubusercontent.com/102524838/165099369-a33f7957-e297-459b-a09e-5b51df43fe99.png)
+
