@@ -1,6 +1,6 @@
 import React from "react";
 
-class SearchSelectItem extends React.Component {
+class SearchResultListItem extends React.Component {
     render() {
         return(
             <div></div>
@@ -8,4 +8,4 @@ class SearchSelectItem extends React.Component {
     }
 }
 
-export default SearchSelectItem;
+export default SearchResultListItem;
