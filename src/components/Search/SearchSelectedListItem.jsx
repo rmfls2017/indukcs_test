@@ -1,9 +1,17 @@
 import React from "react";
 
 class SearchSelectedListItem extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {};
+    }
+
     render() {
         return(
-            <div></div>
+            <div>
+                <span>이름</span>
+            </div>
         )
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBarComponent from './Search/SearchBarComponent';
+import SearchResultList from './Search/SearchResultList';
 
 class SearchComponent extends React.Component {
     constructor(props) {
@@ -19,7 +20,10 @@ class SearchComponent extends React.Component {
 
     render() {
         return (
-            <SearchBarComponent />
+            <div>
+                <SearchBarComponent />
+                <SearchResultList />
+            </div>
         );
     }
 }

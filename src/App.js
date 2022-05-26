@@ -6,6 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <SearchComponent />
+        {/* <List/> */}
       </header>
     </div>
   );

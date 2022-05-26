@@ -1,10 +1,18 @@
 import React from "react";
+import resultItemList from "../../data/resultItemList";
 import SearchResultListItem from "./SearchResultListItem";
 
 class SearchResultList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        
+        this.state = {
+            items: resultItemList
+        };
+    }
+
+    componentDidMount() {
+        
     }
 
     handleClickResultItem(event) {
@@ -12,8 +20,11 @@ class SearchResultList extends React.Component {
     }
 
     render() {
+        const items = this.state.items.map(item => (<SearchResultListItem key={item.id} item={item} />));
         return(
-            <SearchResultListItem onClick={this.handleClickResultItem} />
+            <div>
+                {items}
+            </div>
         );
     }
 }
