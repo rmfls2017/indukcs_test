@@ -28,7 +28,7 @@ class SearchSelect extends React.Component {
         ];
         return(
             <Fragment>
-                <select value={this.state.value} onChange={this.handleChange}>
+                <select value={this.state.value} onChange={this.handleChange} name="searchSelect" >
                     {OPTIONS.map(option => (<option 
                         key={option.value} 
                         value={option.value} 

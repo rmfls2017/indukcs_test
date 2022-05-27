@@ -5,16 +5,16 @@ import SearchSelectedList from "./SearchSelectedList";
 class SearchBarComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedItems: [],
-        };
     }
 
     render() {
         return(
             <div>
-                <SearchForm />
-                <SearchSelectedList selectedItems={this.state.selectedItems} />
+                <SearchForm 
+                    handleSubmitForm={this.props.handleSubmitForm} 
+                    handleInputSearch={this.props.handleInputSearch} 
+                />
+                <SearchSelectedList />
             </div>
         );
     }

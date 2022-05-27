@@ -2,7 +2,7 @@ export default [
     {
       id: 1,
       image: "/assets/img/1.png",
-      name: "	Nurotanplus-F Tab.",
+      name: "Nurotanplus-F Tab.",
       effect: "교혈압약제",
       company: "New Delhi, India",
     },
