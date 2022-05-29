@@ -1,11 +1,11 @@
 import './App.css';
-import SearchComponent from './components/SearchComponent';
+import SearchAppBar from './components/AppNav';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <SearchComponent />
+        <SearchAppBar />
       </header>
     </div>
   );
