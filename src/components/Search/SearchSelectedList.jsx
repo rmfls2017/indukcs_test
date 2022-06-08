@@ -1,29 +1,26 @@
 import React from "react";
-import items from "../../data/resultItemList";
 import SearchSelectedListItem from "./SearchSelectedListItem";
+import {ListGroup} from "react-bootstrap";
 
 class SearchSelectedList extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            items: []
-        };
-
-        this.handleClickItem = this.handleClickItem.bind(this);
-
-        this.state = {
-            maximumItemCount: props.maximumItemCount,
-        }
-    }
-
-    handleClickItem(event) {
-        
     }
 
     render() {
+        const { items } = this.props;
+
         return (
-            <SearchSelectedListItem items={this.items} onClick={this.handleClickItem} />
+            <>
+                { items && items.length > 0 &&
+                    <ListGroup className={"mb-1"} horizontal>
+                        {items.map(item => {
+                            return (<SearchSelectedListItem key={item.id} item={item}
+                                                            handleClick={this.props.handleClick} />);
+                        })}
+                    </ListGroup>
+                }
+            </>
         );
     }
 }

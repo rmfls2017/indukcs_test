@@ -10,11 +10,13 @@ class SearchBarComponent extends React.Component {
     render() {
         return(
             <div>
-                <SearchForm 
+                <SearchForm
+                    searchText={this.props.searchText}
+                    handleChangeSelectBox={this.props.handleChangeSelectBox}
                     handleSubmitForm={this.props.handleSubmitForm} 
-                    handleInputSearch={this.props.handleInputSearch} 
                 />
-                <SearchSelectedList />
+
+                <SearchSelectedList items={this.props.items} handleClick={this.props.handleClick} />
             </div>
         );
     }

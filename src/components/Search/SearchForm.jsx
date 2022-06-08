@@ -1,58 +1,40 @@
 import React, { Fragment } from "react";
 import SearchSelect from "./SearchSelect";
+import {Col, Form, Button, Row} from "react-bootstrap";
 
 class SearchForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedItems: props.selectedItems,
-        }
-
-        this.handleSubmitForm = this.handleSubmitForm.bind(this);
-        this.handleInputSearch = this.handleInputSearch.bind(this);
-    }
-
-    handleSubmitForm(event) {
-        event.preventDefault();
-
-        this.props.handleSubmitForm(event);
-        // event.preventDefault();
-
-        // let value = this.searchRef.current.value;
-
-        // // 빈 값일 때
-        // if (value === "") {
-        //     return false;
-        // }
-
-        // let selectedItems = this.state.selectedItems;
-
-        // // 이미 값이 존재할 때
-        // if (selectedItems.indexOf(value) !== -1) {
-        //     return false;
-        // }
-
-        // if (selectedItems.length >= 10) {
-        //     selectedItems.shift();
-        //     selectedItems.push(this.searchRef.current.value);
-        // } else {
-        //     selectedItems.push(this.searchRef.current.value);
-        // }
-    }
-
-    handleInputSearch(event) {
-        this.props.handleInputSearch(event);
     }
 
     render() {
         return(
-            <Fragment>
-                <form onSubmit={ this.handleSubmitForm } >
-                    <SearchSelect />
-                    <label>Search: <input placeholder="타이레놀" type="text" name="searchInput" onChange={ this.handleInputSearch }/></label>
-                    <input type="submit" value="Search" />
-                </form>
-            </Fragment>
+            <>
+                <Form onSubmit={ this.props.handleSubmitForm } >
+                    <Row className="mb-3 align-items-center">
+                        <SearchSelect handleChange={this.props.handleChangeSelectBox}/>
+
+                        <Form.Group as={Col} controlId="formGridZip">
+                            <Form.Control placeholder={"해열제"} name="searchText" />
+                        </Form.Group>
+
+                        <Col xs="auto">
+                            <Button variant="primary" type="submit">
+                                검색
+                            </Button>
+                        </Col>
+                        {/*<Form.Group as={Col} controlId="formGridState">*/}
+                        {/*    */}
+                        {/*</Form.Group>*/}
+                    </Row>
+                    {/*<label>Search: <input*/}
+                    {/*    placeholder="타이레놀" */}
+                    {/*    type="text" */}
+                    {/*    name="searchText" */}
+                    {/*    // onChange={ this.handleInputSearch }*/}
+                    {/*/></label>*/}
+                </Form>
+            </>
         );
     }
 }

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import {Col, Form} from "react-bootstrap";
 
 class SearchSelect extends React.Component {
     static defaultProps = {
@@ -15,8 +16,12 @@ class SearchSelect extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    handleChange(e) {
+        this.setState({
+            value: e.target.value
+        });
+
+        this.props.handleChange(e.target.value);
     }
 
     render() {
@@ -27,15 +32,20 @@ class SearchSelect extends React.Component {
             {value: 'company', label: '제조사'},
         ];
         return(
-            <Fragment>
-                <select value={this.state.value} onChange={this.handleChange} name="searchSelect" >
-                    {OPTIONS.map(option => (<option 
-                        key={option.value} 
-                        value={option.value} 
-                        defaultValue={this.props.defaultValue === option}>{option.label}
-                    </option>))}
-                </select>
-            </Fragment>
+            <>
+                <Col xs={"auto"}>
+                    <Form.Select value={this.state.value} onChange={this.handleChange} name="searchSelect" >
+                        {OPTIONS.map(option => (<option
+                            key={option.value}
+                            value={option.value}
+                            defaultValue={this.props.defaultValue === option}>{option.label}
+                        </option>))}
+                    </Form.Select>
+                </Col>
+                {/*<Form.Group as={Col}>*/}
+                {/*    */}
+                {/*</Form.Group>*/}
+            </>
         )
     }
 }

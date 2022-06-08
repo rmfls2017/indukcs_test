@@ -1,17 +1,22 @@
 import React from "react";
+import {ListGroup} from "react-bootstrap";
 
 class SearchSelectedListItem extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {};
     }
 
     render() {
+        const style = {
+            display: "inline",
+            paddingRight: "10px",
+        };
+
+        const { item } = this.props;
         return(
-            <div>
-                <span>이름</span>
-            </div>
+            <>
+                <ListGroup.Item action variant="dark" onClick={() => this.props.handleClick(item.id) }>{item.name}</ListGroup.Item>
+            </>
         )
     }
 }
