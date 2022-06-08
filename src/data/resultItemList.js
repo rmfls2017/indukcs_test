@@ -41,4 +41,11 @@ export default [
       effect: "교혈압약제",
       company: "New Delhi, India",
     },
+    {
+      id: 7,
+      image: "/assets/img/2.png",
+      name: "Tylenol",
+      effect: "해열제",
+      company: "Tbilisi, India",
+    }
 ];
