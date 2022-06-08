@@ -1,23 +1,20 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 class SearchResultListItem extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            item: props.item,
-        }
     }
 
     render() {
-        const {name, effect, company, image} = this.state.item;
+        const { id, name, effect, company } = this.props.item;
         return(
-            <div>
-                <img src={image} />
-                <span>{name}</span>
-                <span>{company}</span>
-                <span>{effect}</span>
-            </div>
+            <>
+                <tr onClick={() => this.props.handleClick(id) }>
+                    <td>{name}</td>
+                    <td>{company}</td>
+                    <td>{effect}</td>
+                </tr>
+            </>
         )
     }
 }
