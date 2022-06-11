@@ -1,0 +1,23 @@
+# 파일 규격 버전
+version: "3"
+# 이 항목 밑에 실행하려는 컨테이너 들을 정의
+services:
+  # 서비스 명
+  mongodb:
+    # 사용할 이미지
+    image: mongo
+    # 컨테이너 실행 시 재시작
+    restart: always
+    # 컨테이너 이름 설정
+    container_name: jason-mongo
+    # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
+    ports:
+      - "27017:27017"
+    # -e 옵션
+    environment:
+      # MongoDB 계정 및 패스워드 설정 옵션
+      MONGO_INITDB_ROOT_USERNAME: dev
+      MONGO_INITDB_ROOT_PASSWORD: dev-password
+    volumes:
+      # -v 옵션 (다렉토리 마운트 설정)
+      - ./data/mongodb/data/db:/data/db
