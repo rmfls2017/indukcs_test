@@ -21,6 +21,8 @@ const Colors = [
 ];
 
 function ColorList(props) {
+    console.log(props);
+    
     return(
         <>
             <Select

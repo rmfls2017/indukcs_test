@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Form, Input, Select, } from 'antd';
-import { postPill } from "../../../_actions/pill_actions";
+import { getPill, postPill } from "../../../_actions/pill_actions";
 import FileUpload from '../../utils/FileUpload';
 import ColorList from "./Sections/ColorList";
 import ShapeList from "./Sections/ShapeList";
@@ -13,8 +13,12 @@ const {TextArea} = Input;
 function UploadProductPage(props) {
     const dispatch = useDispatch();
 
+    const [shape, setShape] = useState(1);
+    const [color, setColor] = useState(1);
     const [Images,setImages] = useState([]);
 
+    const shapeChangeHandler = (value) => { setShape(value) }
+    const colorChangeHandler = (value) => { setColor(value) }
     const updateImages = (newImages) => { setImages(newImages) }
 
     return (
@@ -23,21 +27,22 @@ function UploadProductPage(props) {
                 title: '',
                 description: '',
                 ptypes: '',
-                shape: 1,
-                color: 1,
             }}
 
             validationSchema={Yup.object({
                 title: Yup.string().required('알약 제목을 입력해주세요.'),
                 description: Yup.string().required('알약 설명을 입력해주세요.'),
                 ptypes: Yup.string().required('알약 종류를 입력해주세요.'),
-                shape: Yup.number(),
-                color: Yup.number(),
             })}
 
             onSubmit={(values, { setSubmitting }) => {
                 // 이미지는 따로 추가해서 서버에 전달하기
-                dispatch(postPill({...values, images: Images})).then(response => {
+                dispatch(postPill({
+                    shape: shape,
+                    color: color,
+                    images: Images,
+                    ...values,
+                })).then(response => {
                     if (response.payload.success) {
                         alert('알약 업로드에 성공 했습니다.')
                         props.history.push('/')
@@ -118,10 +123,10 @@ function UploadProductPage(props) {
                                     )}
                                 </Form.Item>
                                 <Form.Item required label="Shape">
-                                    <ShapeList onChange={handleChange} />
+                                    <ShapeList onChange={shapeChangeHandler} />
                                 </Form.Item>
                                 <Form.Item required label="Color">
-                                    <ColorList onChange={handleChange} />
+                                    <ColorList onChange={colorChangeHandler} />
                                 </Form.Item>
                                 <Form.Item>
                                     <Button onClick={handleSubmit} type="primary" disabled={isSubmitting} htmlType="submit">

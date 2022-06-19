@@ -9,4 +9,8 @@ module.exports = {
     POST_PILL: 'post_pill',
     SEARCH_PILL: 'search_pill',
     DELETE_PILL: 'delete_pill',
+
+    GET_SEARCH_HISTORIES: 'get_search_histories',
+    POST_SEARCH_HISTORY: 'post_search_history',
+    DELETE_SEARCH_HISTORY: 'delete_search_history'
 }

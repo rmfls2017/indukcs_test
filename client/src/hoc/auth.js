@@ -3,32 +3,38 @@ import React, { useEffect } from 'react';
 import { auth } from '../_actions/user_actions';
 import { useSelector, useDispatch } from "react-redux";
 
-export default function (SpecificComponent, option, adminRoute = null) {
-    function AuthenticationCheck(props) {
-
+/**
+ * 로그인이 필요한 컴포넌트인지 확인 후 컴포넌트를 그린다
+ * 
+ * @param {*} SpecificComponent 파라미터로 넘어온 컴포넌트를 랜더링
+ * @param {*} reqiredLogin 
+ * @param {*} adminRoute 
+ * @returns 
+ */
+export default function (SpecificComponent, reqiredLogin, adminRoute = null) {
+    return (props) => {
         let user = useSelector(state => state.user);
         const dispatch = useDispatch();
 
         useEffect(() => {
-            //To know my current status, send Auth request 
+            // action.auth 통해 유저의 상태 확인
             dispatch(auth()).then(response => {
-                //Not Loggined in Status 
                 if (!response.payload.isAuth) {
-                    if (option) {
+                    if (reqiredLogin) {
                         props.history.push('/login')
                     }
-                    //Loggined in Status 
-                } else {
-                    //supposed to be Admin page, but not admin person wants to go inside
-                    if (adminRoute && !response.payload.isAdmin) {
-                        props.history.push('/')
-                    }
-                    //Logged in Status, but Try to go into log in page 
-                    else {
-                        if (option === false) {
-                            props.history.push('/')
-                        }
-                    }
+
+                    return;
+                }
+
+                if (adminRoute && !response.payload.isAdmin) {
+                    props.history.push('/')
+
+                    return;
+                }
+
+                if (reqiredLogin === false) {
+                    props.history.push('/')
                 }
             })
 
@@ -37,8 +43,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
         return (
             <SpecificComponent {...props} user={user} />
         )
-    }
-    return AuthenticationCheck
+    };
 }
 
 

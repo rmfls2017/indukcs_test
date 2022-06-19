@@ -6,44 +6,54 @@ const { History } = require('../models/History');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'Uploads/')
+        cb(null, 'Uploads/');
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}_${file.originalname}`)
+        cb(null, `${Date.now()}_${file.originalname}`);
     }
-})
+});
 
-router.post('/', (req, res) => {
-    let limit = req.body.limit ? parseInt(req.body.limit) : 20; // parseInt 숫자로 변경
-    let skip = req.body.skip ? parseInt(req.body.skip) : 0;
-    let term = req.body.searchTerm;
+const upload = multer({ storage: storage }).single("file")
+
+router.get('/', (req, res) => {
+    let limit = req.query.limit ? parseInt(req.query.limit) : 20; // parseInt 숫자로 변경
+    let skip = req.query.skip ? parseInt(req.query.skip) : 0;
+    let term = req.query.searchTerm;
 
     let findArgs = {};
+    let filters = [];
+    if (!!req.query.filters) {
+        filters = JSON.parse(req.query.filters);
+    }
 
-    for(let key in req.body.filters) {
-        if(req.body.filters[key].length > 0) {
-            findArgs[key] = req.body.filters[key]
+    for(let key in filters) {
+        if(filters[key].length > 0) {
+            findArgs[key] = filters[key]
         }
     }
 
     if (term) {
-        const { filterTerm, filterColors, filterShapes } = [term, findArgs['color'], findArgs['shape']];
         const history = new History({
-            title: filterTerm,
-            color: filterColors,
-            shape: filterShapes,
+            title: term,
+            color: findArgs.color,
+            shape: findArgs.shape,
         });
+
+        history.save();
+
         Pill.find(findArgs)
             .find({$text: {$search: term }})
             .populate("writer")
             .skip(skip)
             .limit(limit)
             .exec((err, items) => {
+                console.log(term);
+                
                 if(err) return res.status(400).json({success: false, err})
                 return res.status(200).json({success: true, items,
                     postSize: items.length
                 })
-            })
+            });
     } else {
         Pill.find(findArgs)
             .populate("writer")
@@ -59,13 +69,16 @@ router.post('/', (req, res) => {
     }
 });
 
-router.get('/:id', (req, res) => {
-    Pill.find({_id: req.params.id})
-        .populate('writer')
-        .exec((err, item) => {
-            if(err) return res.status(400).send(err)
-            return res.status(200).send({success:true, item})
-        });
+router.post('/image', (req, res) => {
+    //가져온 이미지 저장 
+    upload(req, res, err => {
+        if(err){
+            return req.json({success: false, err});
+        }
+
+        return res.json({success: true, filePath: res.req.file.path, fileName: res.req.file.filename});
+    })
+    
 });
 
 router.post('/', (req, res) => {
@@ -74,6 +87,15 @@ router.post('/', (req, res) => {
         if(err) return res.status(400).json({success: false, err})
         return res.status(200).json({success: true})
     });
+});
+
+router.get('/:id', (req, res) => {
+    Pill.find({_id: req.params.id})
+        .populate('writer')
+        .exec((err, item) => {
+            if(err) return res.status(400).send(err)
+            return res.status(200).send({success:true, item})
+        });
 });
 
 module.exports = router;

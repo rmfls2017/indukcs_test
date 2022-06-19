@@ -23,7 +23,8 @@ function LandingPage() {
         shape: [],
         color: []
     });
-    const [SearchTerm, setSearchTerm] = useState("");
+
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         getItems({
@@ -33,21 +34,6 @@ function LandingPage() {
     }, []);
 
     const getItems = (body, cb) => {
-        // axios.post('/api/product/products', body).then(response => {
-        //     if(response.data.success){
-        //         if (body.loadMore) {
-        //             setProducts([...Products, ...response.data.productInfo]);
-        //         } else {
-        //             setProducts(response.data.productInfo);
-        //         }
-        //
-        //         setPostSize(response.data.postSize);
-        //
-        //         cb && cb();
-        //     } else {
-        //         alert(" 알약을 가져오는데 실패 했습니다.");
-        //     }
-        // }
         dispatch(getPills(body)).then(response => {
             const data = response.payload;
             if (data.success) {
@@ -58,8 +44,6 @@ function LandingPage() {
                 }
 
                 setPostSize(data.postSize);
-
-                cb && cb();
             }
         }).catch(err => {
             message.error('');
@@ -72,7 +56,8 @@ function LandingPage() {
         getItems({
             skip: skip,
             limit: Limit,
-            loadMore : true
+            searchTerm: searchTerm,
+            loadMore : true,
         });
 
         setSkip(skip);
@@ -83,7 +68,8 @@ function LandingPage() {
         getItems({
             skip: 0,
             limit: Limit,
-            filters: filters
+            filters: filters,
+            searchTerm: searchTerm,
         });
 
         setSkip(0);
@@ -109,18 +95,6 @@ function LandingPage() {
             limit: Limit,
             filters: Filters,
             searchTerm: newSearchTerm
-        }, () => {
-            // localStorage 에 저장
-            if (!localStorage.getItem("searchTerm")) {
-                localStorage.setItem("searchTerm", JSON.stringify([newSearchTerm]));
-
-                return;
-            }
-
-            // 저장되어 있지 않은 단어라면 저장
-            if (localStorage.getItem("searchTerm").indexOf(newSearchTerm) === -1) {
-                localStorage.setItem("searchTerm", JSON.stringify([...JSON.parse(localStorage.getItem("searchTerm")), newSearchTerm]));
-            }
         });
 
         setSkip(0);

@@ -15,7 +15,7 @@ function FileUpload(props) {
         }
         formData.append("file", files[0]);
 
-        axios.post('/api/product/image', formData , config)
+        axios.post('/api/pills/image', formData , config)
         .then(response => {
             if(response.data.success){
                 console.log(response.data)
