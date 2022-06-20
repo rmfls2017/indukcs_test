@@ -47,12 +47,13 @@ router.get('/', (req, res) => {
             .skip(skip)
             .limit(limit)
             .exec((err, items) => {
-                console.log(term);
-                
-                if(err) return res.status(400).json({success: false, err})
+                if(err) {
+                    return res.status(400).json({success: false, err});
+                }
+
                 return res.status(200).json({success: true, items,
                     postSize: items.length
-                })
+                });
             });
     } else {
         Pill.find(findArgs)
@@ -60,12 +61,13 @@ router.get('/', (req, res) => {
             .skip(skip)
             .limit(limit)
             .exec((err, items) => {
-                if(err) return res.status(400).json({success: false, err})
+                if(err) {
+                    return res.status(400).json({success: false, err});
+                }
                 return res.status(200).json({success: true, items,
                     postSize: items.length
-                })
+                });
             })
-
     }
 });
 
@@ -73,7 +75,7 @@ router.post('/image', (req, res) => {
     //가져온 이미지 저장 
     upload(req, res, err => {
         if(err){
-            return req.json({success: false, err});
+            return res.json({success: false, err});
         }
 
         return res.json({success: true, filePath: res.req.file.path, fileName: res.req.file.filename});
@@ -84,8 +86,11 @@ router.post('/image', (req, res) => {
 router.post('/', (req, res) => {
     const pill = new Pill(req.body);
     pill.save((err) => {
-        if(err) return res.status(400).json({success: false, err})
-        return res.status(200).json({success: true})
+        if(err) {
+            return res.status(400).json({success: false, err});
+        }
+
+        return res.status(200).json({success: true});
     });
 });
 
@@ -93,8 +98,11 @@ router.get('/:id', (req, res) => {
     Pill.find({_id: req.params.id})
         .populate('writer')
         .exec((err, item) => {
-            if(err) return res.status(400).send(err)
-            return res.status(200).send({success:true, item})
+            if(err) {
+                return res.status(400).send(err);
+            }
+            
+            return res.status(200).send({success:true, item});
         });
 });
 

@@ -37,9 +37,9 @@ function HistoryList() {
     };
     
     const onScroll = (e) => {
-        if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === ContainerHeight) {
-            appendData();
-        }
+        // if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === ContainerHeight) {
+        //     appendData();
+        // }
     };
 
     const onDeleteHandler = (e) => {

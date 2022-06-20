@@ -11,6 +11,8 @@ server 에서 사용할 docker client
 1. 환경설정 파일인 `.env` 를 프로젝트 루트 경로에 만들기 (MongoDB 와 연결할 URI 정보 필요)
 2. 프로젝트 루트에서 `yarn install` 실행 (서버와 관련된 패키지 설치)
 3. client 디렉토리에서 `yarn install` 실행 (클라이언트와 관련된 패키지 설치)
+4. 프로젝트 루트 경로에 `Uploads` 디렉토리 생성
+    - 이미지를 업로드 할 경우 해당 디렉토리로 이미지 이동
 
 # Q&A
 
@@ -40,16 +42,16 @@ server 에서 사용할 docker client
 
 # TODO
 
-- [O] a 링크 Link 로 변경
+- [X] a 링크 Link 로 변경
 
-- [O] 검색 히스토리 리스트 => 부분 수정 필요 (전역 상태변화로 분리하지못함)
+- [X] 검색 히스토리 리스트 => 부분 수정 필요 (전역 상태변화로 분리하지못함)
 
-- [O] Form validation 과정 일치화
+- [X] Form validation 과정 일치화
 
-- [O] 결과 리스트 구현
+- [X] 결과 리스트 구현
 
-- [X] jsx 변환
+- [ ] jsx 변환
 
-- [O] 라우터 변경
+- [X] 라우터 변경
 
-- [O] redux, react-redux 로 Action 이동
+- [X] redux, react-redux 로 Action 이동
