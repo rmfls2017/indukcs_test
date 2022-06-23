@@ -33,13 +33,13 @@ router.get('/', (req, res) => {
     }
 
     if (term) {
-        const history = new History({
-            title: term,
-            color: findArgs.color,
-            shape: findArgs.shape,
-        });
+        // const history = new History({
+        //     title: term,
+        //     color: findArgs.color,
+        //     shape: findArgs.shape,
+        // });
 
-        history.save();
+        // history.save();
 
         Pill.find(findArgs)
             .find({$text: {$search: term }})

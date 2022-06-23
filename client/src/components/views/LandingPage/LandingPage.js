@@ -11,6 +11,7 @@ import {shape, color} from './Sections/Datas'
 import SearchFeature from './Sections/SearchFeature';
 import HistoryList from "./Sections/HistoryList";
 import { getPills } from "../../../_actions/pill_actions";
+import { postHistory } from "../../../_actions/search_history_actions";
 
 function LandingPage() {
     const dispatch = useDispatch();
@@ -34,6 +35,12 @@ function LandingPage() {
     }, []);
 
     const getItems = (body, cb) => {
+        if (body.searchTerm) {
+            dispatch(postHistory(body)).then(response => {
+                console.log(response);
+            });
+        }
+
         dispatch(getPills(body)).then(response => {
             const data = response.payload;
             if (data.success) {

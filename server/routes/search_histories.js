@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
     let findArgs = {};
     let filters = [];
     if (!!req.body.filters) {
-        filters = JSON.parse(req.body.filters);
+        filters = JSON.parse(JSON.stringify(req.body.filters));
     }
 
     for(let key in filters) {
@@ -47,13 +47,14 @@ router.post('/', (req, res) => {
         return res.status(200).json({});
     }
 
-    history.save((err) => {
+    history.save((err, item) => {
         if(err) {
             return res.status(400).json({success: false, err});
         }
 
         return res.status(201).json({
-            success: true
+            success: true,
+            item: item
         });
     });
 });
