@@ -1,24 +1,6 @@
 import React, { useState } from 'react';
 import {Select} from "antd";
-
-const Colors = [
-    {key:1, value : "하양"},
-    {key:2, value : "노랑"},
-    {key:3, value : "주황"},
-    {key:4, value : "분홍"},
-    {key:5, value : "빨강"},
-    {key:6, value : "갈색"},
-    {key:7, value : "연두"},
-    {key:8, value : "초록"},
-    {key:9, value : "청록"},
-    {key:10, value : "파랑"},
-    {key:11, value : "남색"},
-    {key:12, value : "자주"},
-    {key:13, value : "보라"},
-    {key:14, value : "회색"},
-    {key:15, value : "검정"},
-    {key:16, value : "투명"}
-];
+import Colors from '../../../../data/color';
 
 function ColorList(props) {
     console.log(props);

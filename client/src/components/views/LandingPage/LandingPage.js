@@ -7,7 +7,8 @@ import Meta from 'antd/lib/card/Meta';
 import _ from 'lodash';
 import CheckBox from './Sections/CheckBox';
 import ColorBox from './Sections/ColorBox';
-import {shape, color} from './Sections/Datas'
+import Shape from '../../../data/shape';
+import Color from '../../../data/color';
 import SearchFeature from './Sections/SearchFeature';
 import HistoryList from "./Sections/HistoryList";
 import { getPills } from "../../../_actions/pill_actions";
@@ -116,11 +117,11 @@ function LandingPage() {
             <Row gutter={[16, 16]}>
                 {/* shape checkBox */}
                 <Col lg={12} xs={24}>
-                    <CheckBox list={shape} handleFilters={filters => handleFilters(filters, "shape")} />
+                    <CheckBox list={Shape} handleFilters={filters => handleFilters(filters, "shape")} />
                 </Col>
                 {/* color checkBox */}
                 <Col lg={12} xs={24}>
-                    <ColorBox list={color} handleFilters={filters => handleFilters(filters, "color")} />
+                    <ColorBox list={Color} handleFilters={filters => handleFilters(filters, "color")} />
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
